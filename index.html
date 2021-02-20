@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link href="tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="relative h-screen">
+        <!-- Nav -->
+        <nav class="fixed flex justify-between w-full h-16">
+            <!-- Logo direccional -->
+            <div :class="{'z-20 w-16 h-full ml-3 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 opacity-1 z-20 w-16 h-full ml-3' : !toggleActive}">
+                <a href="index.html">
+                    <img class="w-full h-full" src="img/faker.png" alt="logo">
+                </a>
+            </div>
+            <!-- Hamburguesa -->
+            <button class="relative z-20 h-full mr-3 outline-none w-11 opacity-30" @click="toggleActive = !toggleActive">
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute top-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute top-1/2' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute bottom-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 opacity-0 transition delay-50' : toggleActive}">
+
+                </div>
+            </button>
+
+            <!-- Cuadro Nav -->
+            <div :class="{'fixed flex flex-col w-full h-full text-center transition transform translate-x-0 bg-black delay-50 justify-evenly' : toggleActive , 'text-center flex justify-evenly w-full h-full flex-col fixed transform transition delay-50 translate-x-full right-0' : !toggleActive}">
+                <a :href="link.direccion" v-for="link in links" class="tracking-wider text-white uppercase">
+                    {{link.nombre}}
+                </a>
+            </div>
+
+        </nav>
+        <!-- Inicio -->
+        <div class="z-0 flex w-full h-screen bg-black" >
+            <img src="img/faker.png" alt="logoFaker" :class="{'flex transform translate-x-full m-auto h-3/6 w-60 transition delay-50 opacity-0' : toggleActive , 'flex m-auto transform translate-x-0 h-3/6 w-60 opacity-1 transition delay-50' : !toggleActive}">
+            <div :class="{'absolute z-0 flex justify-center w-full h-10 shadow-2xl bottom-10 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 absolute z-0 flex justify-center w-full h-10 shadow-2xl bottom-10 opacity-1' : !toggleActive}">
+                <a :href="red.direccion" v-for="(red, index) in redes" class="w-10 h-full px-2 mx-2 bg-white rounded-full shadow-2xl opacity-30">
+                    <img :src="red.img" alt="" class="w-full h-full">
+                </a>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="pb-8 text-center text-white bg-black">
+            <p>
+                Copyright © 2020 Javfaker Beats. Todos los derechos reservados.
+            </p>
+            <p>
+                'Ayudando artistas a alcanzar su máximo potencial'
+            </p>
+        </div>
+    </div>  
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    toggleActive: false,
+                    redes: 
+                    [
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/facebook.svg'
+                        },
+                        {
+                            nombre: 'Spotify',
+                            direccion: 'https://www.spotify.com',
+                            img: 'img/spotify.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/youtube.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/twitter.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/insta.svg'
+                        },
+                    ],
+                    links: 
+                    [
+                        {
+                            nombre: 'Discografia',
+                            direccion: 'discografia.html',
+                        },
+                        {
+                            nombre: 'Producciones',
+                            direccion: 'producciones.html',
+                        },
+                        {
+                            nombre: 'Beats y servicios',
+                            direccion: 'beats.html',
+                        },
+                        {
+                            nombre: 'Biografia',
+                            direccion: 'biografia.html',
+                        },
+                        {
+                            nombre: 'Contacto',
+                            direccion: 'contacto.html',
+                        },
+                    ]
+                }
+            },
+        })
+    </script>
+</body>
+</html>

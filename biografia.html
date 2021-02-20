@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link href="tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Nav -->
+        <nav class="fixed flex justify-between w-full h-16">
+            <!-- Logo direccional -->
+            <div :class="{'z-20 w-16 h-full ml-3 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 opacity-1 z-20 w-16 h-full ml-3' : !toggleActive}">
+                <a href="index.html">
+                    <img class="w-full h-full" src="img/faker.png" alt="logo">
+                </a>
+            </div>
+            <!-- Hamburguesa -->
+            <button class="relative z-20 h-full mr-3 outline-none w-11 opacity-30" @click="toggleActive = !toggleActive">
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute top-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute top-1/2' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-white transition delay-50 absolute bottom-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 opacity-0 transition delay-50' : toggleActive}">
+
+                </div>
+            </button>
+
+            <!-- Cuadro Nav -->
+            <div :class="{'fixed flex flex-col w-full h-full text-center transition transform translate-x-0 bg-black delay-50 justify-evenly' : toggleActive , 'text-center flex justify-evenly w-full h-full flex-col fixed transform transition delay-50 translate-x-full right-0' : !toggleActive}">
+                <a :href="link.direccion" v-for="link in links" class="tracking-wider text-white uppercase">
+                    {{link.nombre}}
+                </a>
+            </div>
+
+        </nav>
+        <!-- Biografia -->
+        <div class="flex flex-col justify-center h-full px-6 py-20 bg-black">
+            <h1 class="mb-4 text-xl text-white">
+                Javier <span class="text-yellow-300">P</span>eraza | <span class="font-bold text-gold">'Javfaker'</span>  🧔🏻
+            </h1>
+            <div class="">
+                <li class="mb-4 text-white">Javfaker es un beatmaker y productor musical Venezolano radicado en la ciudad de Varsovia, Polonia.</li>
+
+                <li class="mb-4 text-white">A temprana edad desarrolló amor por la música, siendo el rock su gusto principal durante su infancia. Durante su adolescencia, Javfaker descubrió el HipHop y las batallas de freestyle, captando su atención por el contenido lírico en las mismas.</li>
+
+                <li class="mb-4 text-white">Luego de haber aprendido a tocar la guitarra, el bajo, el cuatro y percusión, Javfaker tuvo que dejar su país para ir en busca de una mejor oportunidad. En el año 2018, luego de ahorrar durante un tiempo enfrentando muchos sacrificios, fue capaz de comprar un controlador Akai MPK Mini2, con el cual empezó a experimentar el beatmaking.</li>
+
+                <li class="mb-4 text-white">Luego durante poco tiempo de estudiar el género y la producción musical, Javfaker empieza proyectos con raperos Latinoamericanos como LancerLirical (Venezuela), SNK (Costa Rica), Valles-T (Colombia), Petitt (Venezuela), y otros.</li>
+
+                <li class="mb-4 text-white">Cabe destacar la también participación en competencias de Beatmakers como lo es BDM Beats, en la cual en su primer año logro ser campeon de DOBLE BEAT 2v2 junto al productor Venezolano, Liam. Y Campeon de BDM Beats Venezuela 2020.</li>
+
+                <li class="mb-4 text-white">Cada día intenta aprender más de la música y del HipHop. Tratando de apoyar a productores que están empezando su carrera, Javfaker ofrece videos tutoriales y series en su canal de YouTube.</li>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="pb-8 text-center text-white bg-black">
+            <p>
+                Copyright © 2020 Javfaker Beats. Todos los derechos reservados.
+            </p>
+            <p>
+                'Ayudando artistas a alcanzar su máximo potencial'
+            </p>
+        </div>
+        <script>
+            new Vue({
+            el: '#app',
+            data() {
+                return {
+                    toggleActive: false,
+                    links: 
+                    [
+                        {
+                            nombre: 'Discografia',
+                            direccion: 'discografia.html',
+                        },
+                        {
+                            nombre: 'Producciones',
+                            direccion: 'producciones.html',
+                        },
+                        {
+                            nombre: 'Beats y servicios',
+                            direccion: 'beats.html',
+                        },
+                        {
+                            nombre: 'Biografia',
+                            direccion: 'biografia.html',
+                        },
+                        {
+                            nombre: 'Contacto',
+                            direccion: 'contacto.html',
+                        },
+                    ],
+                }
+            },
+        })
+        </script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link href="tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="relative">
+        <!-- Nav -->
+        <nav class="fixed flex justify-between w-full h-16">
+            <!-- Logo direccional -->
+            <div :class="{'z-20 w-16 h-full ml-3 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 opacity-1 z-20 w-16 h-full ml-3' : !toggleActive}">
+                <a href="index.html">
+                    <img class="w-full h-full" src="img/faker.png" alt="logo">
+                </a>
+            </div>
+            <!-- Hamburguesa -->
+            <button class="relative z-20 h-full mr-3 outline-none w-11 opacity-30" @click="toggleActive = !toggleActive">
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute top-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute top-1/2' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute bottom-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-20 opacity-0 transition delay-50' : toggleActive}">
+
+                </div>
+            </button>
+
+            <!-- Cuadro Nav -->
+            <div :class="{'fixed flex flex-col w-full h-full text-center transition transform translate-x-0 bg-black delay-50 justify-evenly' : toggleActive , 'text-center flex justify-evenly w-full h-full flex-col fixed transform transition delay-50 translate-x-full right-0' : !toggleActive}">
+                <a :href="link.direccion" v-for="link in links" class="tracking-wider text-white uppercase">
+                    {{link.nombre}}
+                </a>
+            </div>
+
+        </nav>
+        <!-- Vinculo -->
+        <div class="flex justify-center pt-20">
+            <iframe src="https://player.beatstars.com/?storeId=107298" class="w-full h-80"> -- none -- </iframe>
+        </div>
+        <!-- Instrumentales -->
+        <div class="pt-6">
+            <h1 class="text-3xl text-center">
+                Instrumentales
+            </h1>
+            <!-- Licencias no exclusivas -->
+            <div class="pb-6 border-b-2">
+                
+                <div v-for="licenciaNo in noExclusivas" v-if="pagina === licenciaNo.id" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
+                    <p class="mb-2 font-semibold">
+                        {{licenciaNo.titulo}}
+                    </p>
+                    <p class="mb-2 font-semibold opacity-40">
+                        {{licenciaNo.subtitulo}}
+                    </p>
+                    <p class="mb-2 text-3xl font-bold">
+                        {{licenciaNo.precio}}
+                    </p>
+                    <div class="flex pt-2 border-t-2">
+                        <p class="mr-1">
+                            <i class="text-green-300 fas fa-check"></i>
+                        </p>
+                        <p class="ml-1">
+                            {{licenciaNo.descripcion}}
+                        </p>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <button v-if="pagina > 1" @click="pagina = pagina - 1" class="w-12 h-12">
+                        <i class="text-4xl fas fa-chevron-left"></i>
+                    </button>
+                    <button v-if="pagina < 3" @click="pagina = pagina + 1" class="w-12 h-12">
+                        <i class="text-4xl fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+            </div>
+            <!-- Licencias exclusivas -->
+            <div class="py-6 border-b-2">
+                <div v-for="licencia in exclusivas" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
+                    <p class="mb-2 font-semibold">
+                        {{licencia.titulo}}
+                    </p>
+                    <p class="mb-2 font-semibold opacity-40">
+                        {{licencia.subtitulo}}
+                    </p>
+                    <p class="mb-2 text-3xl font-bold">
+                        {{licencia.precio}}
+                    </p>
+                    <div class="flex pt-2 border-t-2">
+                        <p class="mr-1">
+                            <i class="text-green-300 fas fa-check"></i>
+                        </p>
+                        <p class="ml-1">
+                            {{licencia.descripcion}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Beat personalizado -->
+            <div class="py-6 border-b-2">
+                <div v-for="beat in beats" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
+                    <p class="mb-2 font-semibold">
+                        {{beat.titulo}}
+                    </p>
+                    <p class="mb-2 font-semibold opacity-40">
+                        {{beat.subtitulo}}
+                    </p>
+                    <p class="mb-2 text-3xl font-bold">
+                        {{beat.precio}}
+                    </p>
+                    <div class="flex pt-2 border-t-2">
+                        <p class="mr-1">
+                            <i class="text-green-300 fas fa-check"></i>
+                        </p>
+                        <p class="ml-1">
+                            {{beat.descripcion}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mezcla y master -->
+        <div class="py-6 border-b-2">
+            <h1 class="text-3xl text-center">
+                Mezclas y masters
+            </h1>
+            <div v-for="mezcla in mezclas" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow" v-if="mezcla.id === paginaMezcla">
+                <p class="mb-2 font-semibold">
+                    {{mezcla.titulo}}
+                </p>
+                <p class="mb-2 text-3xl font-bold">
+                    {{mezcla.precio}}
+                </p>
+                <div class="flex pt-2 border-t-2">
+                    <p class="mr-1">
+                        <i class="text-green-300 fas fa-check"></i>
+                    </p>
+                    <p class="ml-1 ">
+                        {{mezcla.descripcion}}
+                    </p>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <button v-if="paginaMezcla > 1" @click="paginaMezcla = paginaMezcla - 1" class="w-12 h-12">
+                    <i class="text-4xl fas fa-chevron-left"></i>
+                </button>
+                <button v-if="paginaMezcla < 3" @click="paginaMezcla = paginaMezcla + 1" class="w-12 h-12">
+                    <i class="text-4xl fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="pb-8 text-center text-black bg-white">
+            <p>
+                Copyright © 2020 Javfaker Beats. Todos los derechos reservados.
+            </p>
+            <p>
+                'Ayudando artistas a alcanzar su máximo potencial'
+            </p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data() {
+                return {
+                    pagina: 1,
+                    paginaMezcla: 1,
+                    noExclusivas: 
+                    [
+                        {
+                            titulo: 'Licencia no exclusiva (Básica) 🦽',
+                            subtitulo: 'Archivo MP3, disponible para distribuir en YouTube y Plataformas digitales',
+                            precio: '$25',
+                            descripcion: 'Ideal para soltar esa canción que siempre has querido y poder empezar tu carrera.',
+                            id: 1
+                        },
+                        {
+                            titulo: 'Licencia no exclusiva (Standard) 🚲',
+                            subtitulo: 'Archivos MP3 y WAV (Máxima calidad), disponible para distribuir en YouTube y Plataformas digitales',
+                            precio: '$50',
+                            descripcion: 'Da ese paso extra, con esta licencia podrás distribuir tu canción por todas las plataformas digitales en la mayor calidad.',
+                            id: 2
+                        },
+                        {
+                            titulo: 'Licencia no exclusiva (Premium) 🛵',
+                            subtitulo: 'Archivo WAV y Stems (Track individual de cada elemento del beat), disponible para distribuir en YouTube todas las Plataformas digitales',
+                            precio: '$75',
+                            descripcion: 'Ten mayor control de tu tema, con la licencia premium obtendrás el track por track de la instrumental para poder manejar la mezcla de mejor manera.',
+                            id: 3
+                        }
+                    ],
+                    exclusivas: 
+                    [
+                        {
+                            titulo: 'Licencia Exclusiva 🏍',
+                            subtitulo: 'WAV y Stems, derechos de uso para distribuir en todas las plataformas digitales',
+                            precio: '$100',
+                            descripcion: 'Con esta licencia obtendrás todos los beneficios posibles de la instrumental, incluyendo la totalidad de los Derechos de uso. Solo para ti!.',
+                            id: 1
+                        }
+                    ],
+                    beats: 
+                    [
+                        {
+                            titulo: 'Beat personalizado ✍🏼',
+                            subtitulo: 'WAV, Stems, y Beat hecho a tu medida',
+                            precio: '$120',
+                            descripcion: 'Con esta licencia trabajaremos desde 0 y hacer una creación que tengas en mente y realizar tu visión artísticas, además de esto, obtienes todos los Derechos de uso de la instrumental de manera exclusiva',
+                            id: 1
+                        }
+                    ],
+                    mezclas: 
+                    [
+                        {
+                            titulo: 'Mastering 😀',
+                            precio: '$20',
+                            descripcion: 'Da el último paso con fuerza! Revisión de la mezcla y devolucion con aspectos a corregir de ser necesario.',
+                            id: 1,
+                        },
+                        {
+                            titulo: 'Mezcla detallada 😁',
+                            precio: '$60',
+                            descripcion: 'Asegurate que la canción suene lo mejor posible! Mezcla detallada hasta 30 tracks.',
+                            id: 2,
+                        },
+                        {
+                            titulo: 'Mezcla básica + Master de REGALO! 🤩',
+                            precio: '$50',
+                            descripcion: 'Vamos a hacer sonar bien!! Mezcla de hasta 13 tracks y master para que vayas bien resuelto!',
+                            id: 3,
+                        }
+                    ],
+                    // Nav
+                    toggleActive: false,
+                    redes: 
+                    [
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/facebook.svg'
+                        },
+                        {
+                            nombre: 'Spotify',
+                            direccion: 'https://www.spotify.com',
+                            img: 'img/spotify.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/youtube.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/twitter.svg'
+                        },
+                        {
+                            nombre: 'Facebook',
+                            direccion: 'https://www.facebook.com',
+                            img: 'img/insta.svg'
+                        },
+                    ],
+                    links: 
+                    [
+                        {
+                            nombre: 'Discografia',
+                            direccion: 'discografia.html',
+                        },
+                        {
+                            nombre: 'Producciones',
+                            direccion: 'producciones.html',
+                        },
+                        {
+                            nombre: 'Beats y servicios',
+                            direccion: 'beats.html',
+                        },
+                        {
+                            nombre: 'Biografia',
+                            direccion: 'biografia.html',
+                        },
+                        {
+                            nombre: 'Contacto',
+                            direccion: 'contacto.html',
+                        },
+                    ]
+                }
+            },
+        })
+    </script>
+</body>
+</html>

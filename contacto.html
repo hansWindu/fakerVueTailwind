@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link href="tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="relative h-screen">
+        <!-- Nav -->
+        <nav class="fixed flex justify-between w-full h-16">
+            <!-- Logo direccional -->
+            <div :class="{'z-30 w-16 h-full ml-3 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 opacity-1 z-30 w-16 h-full ml-3' : !toggleActive}">
+                <a href="index.html">
+                    <img class="w-full h-full" src="img/faker.png" alt="logo">
+                </a>
+            </div>
+            <!-- Hamburguesa -->
+            <button class="relative z-30 h-full mr-3 outline-none w-11 opacity-30" @click="toggleActive = !toggleActive">
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute top-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform rotate-45 absolute z-30 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute top-1/2' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-30 transition delay-50' : toggleActive}">
+
+                </div>
+                <div :class="{'h-0.5 w-full bg-black transition delay-50 absolute bottom-1/4' : !toggleActive , 'bg-white h-0.5 w-full top-8 transform -rotate-45 absolute z-30 opacity-0 transition delay-50' : toggleActive}">
+
+                </div>
+            </button>
+
+            <!-- Cuadro Nav -->
+            <div :class="{'z-20 fixed flex flex-col w-full h-full text-center transition transform translate-x-0 bg-black delay-50 justify-evenly' : toggleActive , 'z-20 text-center flex justify-evenly w-full h-full flex-col fixed transform transition delay-50 translate-x-full right-0' : !toggleActive}">
+                <a :href="link.direccion" v-for="link in links" class="tracking-wider text-white uppercase">
+                    {{link.nombre}}
+                </a>
+            </div>
+
+        </nav>
+        <!-- Contacto -->
+        <div class="flex h-full">
+            <form action="https://formspree.io/f/xqkynynk" method="POST" class="flex flex-col justify-center text-center" target="_blank">
+                <label class="">
+                    <input type="text" class="p-2 mb-4 border rounded-lg w-72" :class="inputClassName" @change="validarName" v-model="inputName" name="name" placeholder="Nombre y apellido *" autocomplete="off">
+                </label>
+                <label class="">
+                    <input type="email" class="p-2 mb-4 border rounded-lg w-72" :class="inputClassEmail" @change="validarEmail" name="email" placeholder="Correo electronico *" v-model='inputEmail' autocomplete="off">
+                    <input type="text" class="p-2 mb-4 border rounded-lg w-72" name="Titulo" placeholder="Subject *" class="" autocomplete="off">
+                </label>
+                <label class="">
+                    <textarea name="message" class="p-2 mb-4 border rounded-lg w-72" v-model='inputMessage' :class="inputClassMessage" @change="validarMessage" placeholder="Mensaje *" autocomplete="off"></textarea>
+                </label>
+                <div class="flex justify-center mx-auto mb-4 text-center cursor-pointer w-72">
+                    <div :class="{'z-10 relative w-10 h-6 bg-green-400 border-2 border-l rounded-full shadow-inner transition delay-50' : aceptas , 'z-10 relative w-10 h-6 bg-white border-2 border-l rounded-full shadow-inner transition delay-50' : !aceptas , 'opacity-0' : toggleActive}" @click="aceptarPoliticas">
+                        <div :class="{'absolute bg-gray-200 h-4 right-0.5 rounded-full shadow shadow-inner top-0.5 w-4 transition delay-50' : aceptas , 'absolute bg-gray-200 h-4 left-0.5 rounded-full shadow shadow-inner top-0.5 w-4 transition delay-50' : !aceptas}">
+
+                        </div>
+                    </div>
+                    <p class="w-full">
+                        Acepto las polÍticas de privacidad y politicas de cookies
+                    </p>
+                </div>
+                <label :class="{'opacity-0 transition delay-50' : toggleActive}">
+                    <button :class="{'p-2 bg-purple-400 opacity-30 rounded-lg shadow-lg w-72 text-white transition delay-50' : valido , 'p-2 bg-purple-400 rounded-lg shadow-lg w-72 text-white transition delay-50' : !valido}" type="submit" :disabled="valido">
+                        F U E G O 🔥
+                    </button>
+                </label>  
+            </form>
+        </div>
+        <!-- Footer -->
+        <div class="pb-8 text-center text-black bg-white">
+            <p>
+                Copyright © 2020 Javfaker Beats. Todos los derechos reservados.
+            </p>
+            <p>
+                'Ayudando artistas a alcanzar su máximo potencial'
+            </p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    inputName: '',   
+                    aceptas: false,     
+                    inputClassName: '',
+                    inputEmail: '',
+                    inputClassEmail: '',
+                    inputMessage: '',
+                    inputClassMessage: '',
+                    valido: true,
+                    toggleActive: false,
+                    links: 
+                    [
+                        {
+                            nombre: 'Discografia',
+                            direccion: 'discografia.html',
+                        },
+                        {
+                            nombre: 'Producciones',
+                            direccion: 'producciones.html',
+                        },
+                        {
+                            nombre: 'Beats y servicios',
+                            direccion: 'beats.html',
+                        },
+                        {
+                            nombre: 'Biografia',
+                            direccion: 'biografia.html',
+                        },
+                        {
+                            nombre: 'Contacto',
+                            direccion: 'contacto.html',
+                        },
+                    ]
+                }
+            },
+            methods: {
+                validarName() {
+                    if (this.inputName.length > 4) {
+                        this.inputClassName = 'border-green-600 border-2'
+                    } else if (this.inputName.length <= 4) {
+                        this.inputClassName = 'border-red-600 border-2'
+                    } 
+                    this.validarFormulario()
+                },
+                validarMessage() {
+                    if (this.inputMessage.length > 10) {
+                        this.inputClassMessage = 'border-green-600 border-2'
+                    } else if (this.inputMessage.length <= 10) {
+                        this.inputClassMessage = 'border-red-600 border-2'
+                    } 
+                    this.validarFormulario()
+                },
+                validarEmail() {
+                    if (this.inputEmail.includes('@')) {
+                        this.inputClassEmail = 'border-green-600 border-2'
+                    } else {
+                        this.inputClassEmail = 'border-red-600 border-2'
+                    }    
+                    this.validarFormulario()
+                },
+                aceptarPoliticas() {
+                    this.aceptas = !this.aceptas
+                    this.validarFormulario()
+                },
+                validarFormulario() {
+                    if (this.inputName.length > 4 && this.inputMessage.length > 10 && this.inputEmail.includes('@') && this.aceptas === true) {
+                        this.valido = false
+                    } else {
+                        this.valido = true  
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
