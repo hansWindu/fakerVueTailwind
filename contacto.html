@@ -40,19 +40,19 @@
 
         </nav>
         <!-- Contacto -->
-        <div class="flex h-full">
-            <form action="https://formspree.io/f/xqkynynk" method="POST" class="flex flex-col justify-center text-center" target="_blank">
+        <div class="flex justify-center h-full">
+            <form action="https://formspree.io/f/xqkynynk" method="POST" class="flex flex-col justify-center text-center w-72 lg:w-auto" target="_blank">
                 <label class="">
-                    <input type="text" class="p-2 mb-4 border rounded-lg w-72" :class="inputClassName" @change="validarName" v-model="inputName" name="name" placeholder="Nombre y apellido *" autocomplete="off">
+                    <input type="text" class="p-2 mb-4 border rounded-lg w-72 lg:w-full " :class="inputClassName" @change="validarName" v-model="inputName" name="name" placeholder="Nombre y apellido *" autocomplete="off">
                 </label>
                 <label class="">
-                    <input type="email" class="p-2 mb-4 border rounded-lg w-72" :class="inputClassEmail" @change="validarEmail" name="email" placeholder="Correo electronico *" v-model='inputEmail' autocomplete="off">
-                    <input type="text" class="p-2 mb-4 border rounded-lg w-72" name="Titulo" placeholder="Subject *" class="" autocomplete="off">
+                    <input type="email" class="p-2 mb-4 border rounded-lg w-72 lg:w-60 lg:mr-3" :class="inputClassEmail" @change="validarEmail" name="email" placeholder="Correo electronico *" v-model='inputEmail' autocomplete="off">
+                    <input type="text" class="p-2 mb-4 border rounded-lg w-72 lg:w-64" name="Titulo" placeholder="Subject *" class="" autocomplete="off">
                 </label>
                 <label class="">
-                    <textarea name="message" class="p-2 mb-4 border rounded-lg w-72" v-model='inputMessage' :class="inputClassMessage" @change="validarMessage" placeholder="Mensaje *" autocomplete="off"></textarea>
+                    <textarea name="message" class="p-2 mb-4 border rounded-lg w-72 lg:w-full" v-model='inputMessage' :class="inputClassMessage" @change="validarMessage" placeholder="Mensaje *" autocomplete="off"></textarea>
                 </label>
-                <div class="flex justify-center mx-auto mb-4 text-center cursor-pointer w-72">
+                <div class="flex justify-center mx-auto mb-4 text-center cursor-pointer w-72 lg:w-full">
                     <div :class="{'z-10 relative w-10 h-6 bg-green-400 border-2 border-l rounded-full shadow-inner transition delay-50' : aceptas , 'z-10 relative w-10 h-6 bg-white border-2 border-l rounded-full shadow-inner transition delay-50' : !aceptas , 'opacity-0' : toggleActive}" @click="aceptarPoliticas">
                         <div :class="{'absolute bg-gray-200 h-4 right-0.5 rounded-full shadow shadow-inner top-0.5 w-4 transition delay-50' : aceptas , 'absolute bg-gray-200 h-4 left-0.5 rounded-full shadow shadow-inner top-0.5 w-4 transition delay-50' : !aceptas}">
 
@@ -63,7 +63,7 @@
                     </p>
                 </div>
                 <label :class="{'opacity-0 transition delay-50' : toggleActive}">
-                    <button :class="{'p-2 bg-purple-400 opacity-30 rounded-lg shadow-lg w-72 text-white transition delay-50' : valido , 'p-2 bg-purple-400 rounded-lg shadow-lg w-72 text-white transition delay-50' : !valido}" type="submit" :disabled="valido">
+                    <button :class="{'p-2 bg-purple-400 opacity-30 rounded-lg shadow-lg w-72 text-white transition delay-50' : valido , 'p-2 bg-purple-400 rounded-lg shadow-lg w-72 text-white transition delay-50' : !valido , 'hidden' : toggleActive}" type="submit" :disabled="valido">
                         F U E G O 🔥
                     </button>
                 </label>  

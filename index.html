@@ -41,9 +41,9 @@
         </nav>
         <!-- Inicio -->
         <div class="z-0 flex w-full h-screen bg-black" >
-            <img src="img/faker.png" alt="logoFaker" :class="{'flex transform translate-x-full m-auto h-3/6 w-60 transition delay-50 opacity-0' : toggleActive , 'flex m-auto transform translate-x-0 h-3/6 w-60 opacity-1 transition delay-50' : !toggleActive}">
+            <img src="img/faker.png" alt="logoFaker" :class="{'flex transform translate-x-full m-auto transition delay-50 opacity-0 sm:w-80' : toggleActive , 'flex m-auto transform translate-x-0 opacity-1 transition delay-50 sm:w-80' : !toggleActive}">
             <div :class="{'absolute z-0 flex justify-center w-full h-10 shadow-2xl bottom-10 opacity-0 transition delay-50' : toggleActive, 'transition delay-50 absolute z-0 flex justify-center w-full h-10 shadow-2xl bottom-10 opacity-1' : !toggleActive}">
-                <a :href="red.direccion" v-for="(red, index) in redes" class="w-10 h-full px-2 mx-2 bg-white rounded-full shadow-2xl opacity-30">
+                <a :href="red.direccion" v-for="(red, i) in redes" class="w-10 h-full px-2 mx-2 rounded-full shadow-2xl opacity-30" :class="red.back">
                     <img :src="red.img" alt="" class="w-full h-full">
                 </a>
             </div>
@@ -64,32 +64,44 @@
             data() {
                 return {
                     toggleActive: false,
+                    circuloRed: '',
+                    ciruloRedClass: '',
                     redes: 
                     [
                         {
                             nombre: 'Facebook',
                             direccion: 'https://www.facebook.com',
-                            img: 'img/facebook.svg'
+                            img: 'img/facebook.svg',
+                            id: 1,
+                            back: 'bg-blue-600'
                         },
                         {
                             nombre: 'Spotify',
                             direccion: 'https://www.spotify.com',
-                            img: 'img/spotify.svg'
+                            img: 'img/spotify.svg',
+                            id: 2,
+                            back: 'bg-green-600'
                         },
                         {
-                            nombre: 'Facebook',
-                            direccion: 'https://www.facebook.com',
-                            img: 'img/youtube.svg'
+                            nombre: 'youtube',
+                            direccion: 'https://www.youtube.com',
+                            img: 'img/youtube.svg',
+                            id: 3,
+                            back: 'bg-red-600'
                         },
                         {
-                            nombre: 'Facebook',
-                            direccion: 'https://www.facebook.com',
-                            img: 'img/twitter.svg'
+                            nombre: 'twitter',
+                            direccion: 'https://www.twitter.com',
+                            img: 'img/twitter.svg',
+                            id: 4,
+                            back: 'bg-blue-300'
                         },
                         {
-                            nombre: 'Facebook',
-                            direccion: 'https://www.facebook.com',
-                            img: 'img/insta.svg'
+                            nombre: 'insta',
+                            direccion: 'https://www.instagram.com',
+                            img: 'img/insta.svg',
+                            id: 5,
+                            back: 'bg-purple-600'
                         },
                     ],
                     links: 
@@ -116,6 +128,9 @@
                         },
                     ]
                 }
+            },
+            methods: {
+               
             },
         })
     </script>

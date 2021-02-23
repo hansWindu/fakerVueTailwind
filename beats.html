@@ -41,97 +41,100 @@
 
         </nav>
         <!-- Vinculo -->
-        <div class="flex justify-center pt-20">
-            <iframe src="https://player.beatstars.com/?storeId=107298" class="w-full h-80"> -- none -- </iframe>
+        <div class="flex justify-center m-auto pt-20 w-9/12">
+            <iframe src="https://player.beatstars.com/?storeId=107298" class="w-full h-screen"> -- none -- </iframe>
         </div>
         <!-- Instrumentales -->
         <div class="pt-6">
-            <h1 class="text-3xl text-center">
+            <h1 class="text-3xl text-center font-extralight">
                 Instrumentales
             </h1>
             <!-- Licencias no exclusivas -->
-            <div class="pb-6 border-b-2">
+            <div class="lg:flex lg:flex-row lg:justify-center">
+                <div class="lg:px-6 lg:py-6 lg:border-b-2">
                 
-                <div v-for="licenciaNo in noExclusivas" v-if="pagina === licenciaNo.id" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
-                    <p class="mb-2 font-semibold">
-                        {{licenciaNo.titulo}}
-                    </p>
-                    <p class="mb-2 font-semibold opacity-40">
-                        {{licenciaNo.subtitulo}}
-                    </p>
-                    <p class="mb-2 text-3xl font-bold">
-                        {{licenciaNo.precio}}
-                    </p>
-                    <div class="flex pt-2 border-t-2">
-                        <p class="mr-1">
-                            <i class="text-green-300 fas fa-check"></i>
+                    <div v-for="licenciaNo in noExclusivas" v-if="pagina === licenciaNo.id" class="w-72 flex flex-col p-4 m-auto my-6 bg-white border border-gray-200 rounded-lg shadow">
+                        <p class="mb-2 font-semibold">
+                            {{licenciaNo.titulo}}
                         </p>
-                        <p class="ml-1">
-                            {{licenciaNo.descripcion}}
+                        <p class="mb-2 font-semibold opacity-40">
+                            {{licenciaNo.subtitulo}}
                         </p>
+                        <p class="mb-2 text-3xl font-bold">
+                            {{licenciaNo.precio}}
+                        </p>
+                        <div class="flex pt-2 border-t-2">
+                            <p class="mr-1">
+                                <i class="text-green-300 fas fa-check"></i>
+                            </p>
+                            <p class="ml-1">
+                                {{licenciaNo.descripcion}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button v-if="pagina > 1" @click="pagina = pagina - 1" class="w-12 h-12">
+                            <i class="text-4xl fas fa-chevron-left"></i>
+                        </button>
+                        <button v-if="pagina < 3" @click="pagina = pagina + 1" class="w-12 h-12">
+                            <i class="text-4xl fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+                <!-- Licencias exclusivas -->
+                <div class="lg:py-6 lg:border-b-2 lg:px-6">
+                    <div v-for="licencia in exclusivas" class="w-72 flex flex-col p-4 m-auto my-6 bg-white border border-gray-200 rounded-lg shadow">
+                        <p class="mb-2 font-semibold">
+                            {{licencia.titulo}}
+                        </p>
+                        <p class="mb-2 font-semibold opacity-40">
+                            {{licencia.subtitulo}}
+                        </p>
+                        <p class="mb-2 text-3xl font-bold">
+                            {{licencia.precio}}
+                        </p>
+                        <div class="flex pt-2 border-t-2">
+                            <p class="mr-1">
+                                <i class="text-green-300 fas fa-check"></i>
+                            </p>
+                            <p class="ml-1">
+                                {{licencia.descripcion}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="flex justify-center">
-                    <button v-if="pagina > 1" @click="pagina = pagina - 1" class="w-12 h-12">
-                        <i class="text-4xl fas fa-chevron-left"></i>
-                    </button>
-                    <button v-if="pagina < 3" @click="pagina = pagina + 1" class="w-12 h-12">
-                        <i class="text-4xl fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <!-- Licencias exclusivas -->
-            <div class="py-6 border-b-2">
-                <div v-for="licencia in exclusivas" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
-                    <p class="mb-2 font-semibold">
-                        {{licencia.titulo}}
-                    </p>
-                    <p class="mb-2 font-semibold opacity-40">
-                        {{licencia.subtitulo}}
-                    </p>
-                    <p class="mb-2 text-3xl font-bold">
-                        {{licencia.precio}}
-                    </p>
-                    <div class="flex pt-2 border-t-2">
-                        <p class="mr-1">
-                            <i class="text-green-300 fas fa-check"></i>
+                <!-- Beat personalizado -->
+                <div class="lg:py-6 border-b-2 lg:px-6">
+                    <div v-for="beat in beats" class="w-72 flex flex-col p-4 m-auto my-6 bg-white border border-gray-200 rounded-lg shadow">
+                        <p class="mb-2 font-semibold">
+                            {{beat.titulo}}
                         </p>
-                        <p class="ml-1">
-                            {{licencia.descripcion}}
+                        <p class="mb-2 font-semibold opacity-40">
+                            {{beat.subtitulo}}
                         </p>
+                        <p class="mb-2 text-3xl font-bold">
+                            {{beat.precio}}
+                        </p>
+                        <div class="flex pt-2 border-t-2">
+                            <p class="mr-1">
+                                <i class="text-green-300 fas fa-check"></i>
+                            </p>
+                            <p class="ml-1">
+                                {{beat.descripcion}}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Beat personalizado -->
-            <div class="py-6 border-b-2">
-                <div v-for="beat in beats" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow">
-                    <p class="mb-2 font-semibold">
-                        {{beat.titulo}}
-                    </p>
-                    <p class="mb-2 font-semibold opacity-40">
-                        {{beat.subtitulo}}
-                    </p>
-                    <p class="mb-2 text-3xl font-bold">
-                        {{beat.precio}}
-                    </p>
-                    <div class="flex pt-2 border-t-2">
-                        <p class="mr-1">
-                            <i class="text-green-300 fas fa-check"></i>
-                        </p>
-                        <p class="ml-1">
-                            {{beat.descripcion}}
-                        </p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <!-- Mezcla y master -->
         <div class="py-6 border-b-2">
-            <h1 class="text-3xl text-center">
-                Mezclas y masters
+            <h1 class="text-3xl text-center font-extralight">
+                Mezcla y master
             </h1>
-            <div v-for="mezcla in mezclas" class="flex flex-col p-4 m-4 bg-white border border-gray-200 rounded-lg shadow" v-if="mezcla.id === paginaMezcla">
+            <div v-for="mezcla in mezclas" class="w-72 flex flex-col p-4 m-auto my-6 bg-white border border-gray-200 rounded-lg shadow" v-if="mezcla.id === paginaMezcla">
                 <p class="mb-2 font-semibold">
                     {{mezcla.titulo}}
                 </p>
@@ -157,7 +160,7 @@
             </div>
         </div>
         <!-- Footer -->
-        <div class="pb-8 text-center text-black bg-white">
+        <div class="py-8 text-center text-black bg-white font-extralight">
             <p>
                 Copyright © 2020 Javfaker Beats. Todos los derechos reservados.
             </p>

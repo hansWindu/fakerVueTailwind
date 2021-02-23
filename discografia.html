@@ -40,8 +40,10 @@
 
         </nav>
         <!-- Discografia -->
-        <div class="flex flex-col justify-center h-screen m-auto bg-black px-9">
-            <iframe v-for="video in discografia" :src="video.direccion" class="w-full h-32 mb-4" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="bg-black flex flex-col h-screen justify-center px-9">
+            <div class="flex flex-col justify-center pt-6 m-auto lg:flex-row">
+                <iframe v-for="video in discografia" :src="video.direccion" class="w-60 sm:h-4/5 mb-6 lg:w-6/12 lg:h-44 lg:px-4" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <a href="youtube.com" class="text-center text-white">
                 🤩 Ver mas 🤩
             </a>
